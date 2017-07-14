@@ -12,6 +12,9 @@ class Ringer(Thread):
         self._ringer2 = OutputDevice(13)
         self._button = Button(7)
 
+        self._last_state = 1
+        self._last_ts = time.time()
+        self._last_check = time.time()
         self._ring = 1
         self.max_ring_cnt = 2
 
@@ -22,6 +25,7 @@ class Ringer(Thread):
     def run(self):
         ring_cnt = 0
         cnt = 0
+        last_ts = time.time()
         try:
             print("Press CTRL+C to exit")
             while self._ring:
@@ -38,17 +42,29 @@ class Ringer(Thread):
                         ring_cnt += 1
                     continue
 
-                print('|', end='', flush=True)
-                sleep(0.01)
-                print('.', end='', flush=True)
-                sleep(0.01)
-                print('+', end='', flush=True)
-                sleep(0.01)
-                print('.', end='', flush=True)
-                sleep(0.01)
+                if self.on:
+                    self._ringer1.on()
+                    sleep(0.01)
+                    self._ringer1.off()
+                    sleep(0.01)
+                    self._ringer1.on()
+                    sleep(0.01)
+                    self._ringer1.off()
+                    sleep(0.01)
+                else:
+                    print('|', end='', flush=True)
+                    sleep(0.01)
+                    print('.', end='', flush=True)
+                    sleep(0.01)
+                    print('+', end='', flush=True)
+                    sleep(0.01)
+                    print('.', end='', flush=True)
+                    sleep(0.01)
+
                 cnt += 1
                 last_ts = time.time()
         except KeyboardInterrupt:
+            self.reset_ringer()
             print("KeyboardInterrupt")
             return False
 
