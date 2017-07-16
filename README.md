@@ -9,7 +9,6 @@ This is a hack to reactivate an old telephone and use it as alert system. Its po
 
 ## used software
 - [DietPi](http://dietpi.com/)
-- [gpiozero python lib](https://gpiozero.readthedocs.io/en/stable/index.html)
 - Python
 
 
