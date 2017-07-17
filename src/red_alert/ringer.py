@@ -13,13 +13,14 @@ class Ringer(Thread):
         self._button = 7
 
         GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
         GPIO.setup(self._ringer1, GPIO.OUT)
         GPIO.output(self._ringer1, GPIO.LOW)
         GPIO.setup(self._ringer2, GPIO.OUT)
         GPIO.output(self._ringer2, GPIO.LOW)
         GPIO.setup(self._button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-        self._last_state = 1
+        self._last_state = 0
         self._last_ts = time.time()
         self._last_check = time.time()
         self._ring = 1
