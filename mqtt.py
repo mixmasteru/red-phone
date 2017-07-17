@@ -2,8 +2,8 @@ import os
 import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-from red_alert.config import iot_host
-from red_alert.red_phone import RedPhone
+from src.red_alert.config import iot_host
+from src.red_alert.red_phone import RedPhone
 
 realPath = os.path.realpath(__file__)
 dirPath = os.path.dirname(realPath)+"/"

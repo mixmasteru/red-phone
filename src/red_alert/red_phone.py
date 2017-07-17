@@ -1,7 +1,7 @@
 import time
 from threading import Event
-from red_alert.speech import Speech
-from red_alert.ringer import Ringer
+from .speech import Speech
+from .ringer import Ringer
 
 
 class RedPhone:
