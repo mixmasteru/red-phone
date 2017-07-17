@@ -98,12 +98,11 @@ class Ringer(Thread):
             ret = 0
         else:
             state = GPIO.input(self._button)  # Read button state
-            if not self._last_state and state:
+            if (not self._last_state) and state:
                 print("got it")
                 ret = 1
 
             self._last_state = state
-            # sleep(0.05)
             self._last_check = time.time()
         return ret
 
