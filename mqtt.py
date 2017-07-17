@@ -24,7 +24,7 @@ def custom_callback(client, userdata, message):
     print("from topic: ")
     print(message.topic)
     print("--------------\n\n")
-    msg = json.loads(message.payload)
+    msg = json.loads(message.payload.decode("utf-8"))
     red_phone.alert(msg['message'])
 
 
