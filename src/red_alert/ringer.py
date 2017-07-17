@@ -1,16 +1,23 @@
 import time
+import RPi.GPIO as GPIO
 from threading import Thread
 from time import sleep
-from gpiozero import Button, OutputDevice
 
 
 class Ringer(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.on = True
-        self._ringer1 = OutputDevice(11)
-        self._ringer2 = OutputDevice(13)
-        self._button = Button(7)
+        self._ringer1 = 11
+        self._ringer2 = 13
+        self._button = 7
+
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self._ringer1, GPIO.OUT)
+        GPIO.output(self._ringer1, GPIO.LOW)
+        GPIO.setup(self._ringer2, GPIO.OUT)
+        GPIO.output(self._ringer2, GPIO.LOW)
+        GPIO.setup(self._button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
         self._last_state = 1
         self._last_ts = time.time()
@@ -29,6 +36,10 @@ class Ringer(Thread):
         try:
             print("Press CTRL+C to exit")
             while self._ring:
+                if self.checkbutton():
+                    self.reset_ringer()
+                    return True
+
                 if ring_cnt >= self.max_ring_cnt:
                     print("max ring")
                     return False
@@ -43,13 +54,13 @@ class Ringer(Thread):
                     continue
 
                 if self.on:
-                    self._ringer1.on()
+                    GPIO.output(self._ringer1, GPIO.HIGH)
                     sleep(0.01)
-                    self._ringer1.off()
+                    GPIO.output(self._ringer1, GPIO.LOW)
                     sleep(0.01)
-                    self._ringer1.on()
+                    GPIO.output(self._ringer2, GPIO.HIGH)
                     sleep(0.01)
-                    self._ringer1.off()
+                    GPIO.output(self._ringer2, GPIO.LOW)
                     sleep(0.01)
                 else:
                     print('|', end='', flush=True)
@@ -85,7 +96,7 @@ class Ringer(Thread):
         if ts - self._last_check <= 0.05:
             ret = 0
         else:
-            state = self._button.is_pressed  # Read button state
+            state = GPIO.input(self._button)  # Read button state
             if self._last_state and (not state):
                 print("got it")
                 ret = 1
@@ -96,5 +107,5 @@ class Ringer(Thread):
         return ret
 
     def reset_ringer(self):
-        self._ringer1.off()
-        self._ringer2.off()
+        GPIO.output(self._ringer1, GPIO.LOW)
+        GPIO.output(self._ringer2, GPIO.LOW)
