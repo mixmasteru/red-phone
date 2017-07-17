@@ -98,7 +98,7 @@ class Ringer(Thread):
             ret = 0
         else:
             state = GPIO.input(self._button)  # Read button state
-            if self._last_state and state:
+            if not self._last_state and state:
                 print("got it")
                 ret = 1
 
