@@ -1,12 +1,14 @@
 import time
 import RPi.GPIO as GPIO
-from threading import Thread
+from threading import Thread, Event
 from time import sleep
 
 
 class Ringer(Thread):
-    def __init__(self):
+    def __init__(self, ready):
         Thread.__init__(self)
+        self.ready = ready
+        self.picked_up = False
         self.on = True
         self._ringer1 = 11
         self._ringer2 = 13
@@ -39,11 +41,13 @@ class Ringer(Thread):
             while self._ring:
                 if self.checkbutton():
                     self.reset_ringer()
-                    return True
+                    self.picked_up = True
+                    self.ready.set()
 
                 if ring_cnt >= self.max_ring_cnt:
                     print("max ring")
-                    return False
+                    self.reset_ringer()
+                    self.ready.set()
 
                 # pause
                 if cnt >= 25:
@@ -79,12 +83,9 @@ class Ringer(Thread):
             self.reset_ringer()
             print("KeyboardInterrupt")
             return False
-
-    def pickup(self):
-        self._ring = 0
-        print("picked up")
-        self.reset_ringer()
-        return True
+        except Exception:
+            self.reset_ringer()
+            raise Exception
 
     def checkbutton(self):
         """

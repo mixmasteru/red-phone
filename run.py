@@ -1,8 +1,13 @@
 from src.red_alert.ringer import Ringer
 from src.red_alert.speech import Speech
+from threading import Event
 
-r = Ringer()
+ready = Event()
+r = Ringer(ready)
 r.run()
+ready.wait()
+
+print("done")
 
 #s = Speech()
 #s.request_polly("Achtung! Der Server Frontend, in der Region EU - Frankfurt, ist nicht erreichbar")
