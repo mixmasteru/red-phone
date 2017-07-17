@@ -41,7 +41,9 @@ myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 # Connect and subscribe to AWS IoT
 myAWSIoTMQTTClient.connect()
+print("connected")
 myAWSIoTMQTTClient.subscribe(topic, 1, custom_callback)
+print("subscribed to topic "+topic)
 time.sleep(2)
 
 
