@@ -43,11 +43,13 @@ class Ringer(Thread):
                     self.reset_ringer()
                     self.picked_up = True
                     self.ready.set()
+                    return True
 
                 if ring_cnt >= self.max_ring_cnt:
                     print("max ring")
                     self.reset_ringer()
                     self.ready.set()
+                    return False
 
                 # pause
                 if cnt >= 25:
