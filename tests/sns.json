@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:eu-central-1:1112",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "7b551c96-b3aa-5ad8-adb7-4d70747db830",
+        "TopicArn": "arn:aws:sns:eu-central-1:",
+        "Subject": "ALARM: \"ping error\" in EU - Frankfurt",
+        "Message": "{\"AlarmName\":\"ping error\",\"AlarmDescription\":\"Frontend\",\"AWSAccountId\":\"1111111\",\"NewStateValue\":\"ALARM\",\"NewStateReason\":\"Threshold Crossed: 1 datapoint [3.0 (17/07/17 14:10:00)] was greater than or equal to the threshold (0.0).\",\"StateChangeTime\":\"2017-07-17T14:11:35.123+0000\",\"Region\":\"EU - Frankfurt\",\"OldStateValue\":\"INSUFFICIENT_DATA\",\"Trigger\":{\"MetricName\":\"Errors\",\"Namespace\":\"AWS/Lambda\",\"StatisticType\":\"Statistic\",\"Statistic\":\"SUM\",\"Unit\":null,\"Dimensions\":[{\"name\":\"FunctionName\",\"value\":\"ping\"}],\"Period\":60,\"EvaluationPeriods\":1,\"ComparisonOperator\":\"GreaterThanOrEqualToThreshold\",\"Threshold\":0.0,\"TreatMissingData\":\"\",\"EvaluateLowSampleCountPercentile\":\"\"}}",
+        "Timestamp": "2017-07-17T14:11:35.219Z",
+        "SignatureVersion": "1",
+        "Signature": "WC3EL9d0JTlZ7A1MSJ33AVK6eyotH9PNMXLghOHPZatish4n1G0jVAD8PH/JLBs48MZ9+Fb43heQN8zwuaCIsHSKIUdhWGGLgFC0YrEFtCtVTUdLTpDs74GXohdXlMwW8fXx4QQCsgMsBTmUdGJzVeLC1nBKPQr8+sZVeklxNixinAZMsIc2DJUuFEFgqrFLA8M2krMFYKuWw7oBecxSfxM0LP6I/xACXe3AHP40DnKaVNPPepuLgZBH7NO/Xk/5YDqUJn0ihk/PxmcM70HrqB7VrJp1u1WgMaovM6eMm6O+O1S1R/4EPKcfVSzpKADwh9f4LfkiRYOuImePQSUvMA==",
+        "SigningCertUrl": "https://sns.eu-central-1.amazonaws.com/SimpleNotificationService",
+        "UnsubscribeUrl": "https://sns.eu-central-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

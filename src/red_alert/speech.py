@@ -35,7 +35,7 @@ class Speech:
             SampleRate=str(sample_rate),
             Text=text,
             TextType=text_type,
-            VoiceId='Marlene'
+            VoiceId='Vicki'
         )
 
         try:
