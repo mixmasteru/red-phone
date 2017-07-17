@@ -1,6 +1,6 @@
 import os
 import boto3
-from .config import key_id, aws_secret_access_key, region_name, sample_rate
+from red_alert.config import key_id, aws_secret_access_key, region_name, sample_rate
 from pygame import mixer, time
 
 
