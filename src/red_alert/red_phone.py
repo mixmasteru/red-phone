@@ -1,18 +1,22 @@
+import time
+from threading import Event
 from .speech import Speech
 from .ringer import Ringer
-import time
 
 
 class RedPhone:
 
     def __init__(self):
         self.speech = Speech()
-        self.ringer = Ringer()
+        self.ready = Event()
+        self.ringer = Ringer(self.ready)
         self.wait_second = 2
         self.ring_cnt = 2
 
     def alert(self, text):
-        pickup = self.ringer.ring(self.ring_cnt)
+        self.ringer.ring(self.ring_cnt)
+        self.ready.wait()
+        pickup = self.ringer.picked_up
         if pickup:
             ts = time.time()
             self.speech.request_polly(text)
@@ -21,3 +25,6 @@ class RedPhone:
                 time.sleep(self.wait_second-diff)
 
             self.speech.speak()
+
+        print("by")
+
