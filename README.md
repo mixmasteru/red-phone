@@ -14,7 +14,12 @@ This is a hack to reactivate an old telephone and use it as alert system. Its po
 
 ## Requirements
 ```bash
-sudo apt-get install python-pygame
+apt-get install python3.4 
+apt-get install python3.4-dev
+apt-get install alsa-utils
+apt-get install python3-pip
+apt-get install python3-pygame
+apt-get install python3-rpi.gpio
 ```
 
 ## Python
